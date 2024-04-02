@@ -30,8 +30,8 @@
 <div id="app">
   <div class="header">
     <h1>{{title}}</h1>
-    <button class="btn btn-primary" @click="setState('edit')">adicionar</button>
-    <button class="btn btn-cancel" @click="setState('default')">cancelar</button>
+    <button v-if="state == 'default'" class="btn btn-primary" @click="setState('edit')">adicionar</button>
+    <button v-else class="btn btn-cancel" @click="setState('default')">cancelar</button>
   </div> 
    
 
