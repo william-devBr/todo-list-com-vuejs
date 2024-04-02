@@ -1,0 +1,87 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Vue Js - Todo List</title>
+    <!--<script src="components.js"></script>-->
+ <style>
+  .text {
+    color: rgb(61, 206, 61);
+    font-weight: 500;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+  }
+  .btn {
+    border:none;
+    width: auto;
+    padding:10px;
+  }
+  .btn-primary {
+    background-color: royalblue;
+    color:white;
+  }
+  .btn-cancel {
+    background-color: red;
+    color: #fff;
+  }
+ </style>
+  </head>
+<body>
+
+<div id="app">
+  <div class="header">
+    <h1>{{title}}</h1>
+    <button class="btn btn-primary" @click="setState('edit')">adicionar</button>
+    <button class="btn btn-cancel" @click="setState('default')">cancelar</button>
+  </div> 
+   
+
+  <div v-if="state =='edit'" class="add-form-item">  
+    <input type="text" v-model="newItem" id="" placeholder="add new item">
+    <button @click="add" class="btn btn-primary">salvar</button>
+  
+  </div>
+  <div>
+    <ul>
+      <li v-for="item in items">{{item.toLocaleUpperCase()}}</li>
+    </ul>
+  </div>
+   
+   <p class="text">{{messageText}}</p>
+   <p v-if="items.length == 0">Não há nada na sua lista</p>
+</div>
+<script src="vue.js"></script>
+<script>
+ 
+const App =new Vue({
+    el : "#app",
+    data : {
+      title : "Todo List",
+      newItem : "",
+      messageText : "",
+      state : 'default',
+      items : [
+     
+      ]
+    },
+    methods : {
+      add(){
+        this.items.push(this.newItem);
+        this.newItem = "";
+        this.state = 'default'
+        this.messageText = "item inserido com sucesso"
+        this.onLimp();
+      },
+      onLimp(){
+        setInterval(()=>{
+           this.messageText = " ";
+        },3000)
+      },
+      setState(state){
+        this.state = state
+      }
+    }
+})
+</script>
+
+</body>
+</html>
